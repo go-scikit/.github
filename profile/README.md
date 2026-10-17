@@ -88,12 +88,50 @@ says how it was measured.
   polars is faster than go-dataframe on most of the operations measured
   ([perf.md](https://github.com/go-dataframe/dataframe/blob/main/docs/perf.md)).
 
+## Roadmap
+
+The goal is feature parity with MATLAB (base and toolboxes) and Mathematica,
+in pure Go (CGO=0), each piece validated against the reference tools of its
+domain (SciPy/NumPy, mpmath, Octave, PARI/GP, Maxima, SuiteSparse, NIST StRD
+and others). The plan, the home of each domain and the order of the work are
+in [go-scikit/roadmap](https://github.com/go-scikit/roadmap). None of the new
+organisations below has released anything yet.
+
+| Wave | What | Homes |
+|---|---|---|
+| 1. Everyday MATLAB core, self-hosted verification | correctly rounded `big.Float` functions and a Go oracle harness; sparse matrices and iterative solvers; interpolation and splines; filter design and spectral estimation | go-bignum, go-sparse, go-approx, go-dsp |
+| 2. Models and geometry | constrained and global optimisation; linear models and GLM; exact predicates, Delaunay, Voronoi; automatic differentiation; units; scientific file formats; dense linear algebra additions | go-numerics/optimize, go-statistics/models, go-geometry, go-autodiff, go-units, go-sciio, go-ndarray/linalg |
+| 3. Systems, PDEs, 3D, interactivity | 3D plots and `Manipulate`; control systems; meshing and finite elements; sparse direct solvers, wavelets, Chebyshev/AAA; machine learning and time series; graph algorithms and layouts | go-plot, go-notebook, go-control, go-geometry, go-fem, go-sparse, go-dsp, go-approx, go-mlkit, go-statistics/timeseries, go-graphalgo, go-graphdrawing |
+| 4. Mathematica's core | ball arithmetic, N-digit special functions and number theory; computer algebra | go-bignum, go-symbolic |
+
+The thirteen new organisations, created on 2026-10-17:
+
+- [**go-bignum**](https://github.com/go-bignum), in progress: arbitrary precision, number theory, the Go oracle harness.
+- [**go-sparse**](https://github.com/go-sparse), in progress: sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers.
+- [**go-approx**](https://github.com/go-approx), in progress: interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data.
+- [**go-dsp**](https://github.com/go-dsp), in progress: filter design and filtering, spectral estimation, resampling, wavelets, audio I/O.
+- [**go-symbolic**](https://github.com/go-symbolic), planned: computer algebra.
+- [**go-mlkit**](https://github.com/go-mlkit), planned: machine learning, clustering, classification, model selection.
+- [**go-autodiff**](https://github.com/go-autodiff), planned: automatic differentiation.
+- [**go-geometry**](https://github.com/go-geometry), planned: robust predicates, convex hull, Delaunay, Voronoi, k-d trees, mesh generation.
+- [**go-fem**](https://github.com/go-fem), planned: finite elements and PDE solvers.
+- [**go-graphalgo**](https://github.com/go-graphalgo), planned: graph algorithms.
+- [**go-control**](https://github.com/go-control), planned: control systems and DAE solvers.
+- [**go-units**](https://github.com/go-units), planned: units and physical constants.
+- [**go-sciio**](https://github.com/go-sciio), planned: scientific file formats (HDF5, MAT, NetCDF, FITS, npy, Matrix Market, WAV/FLAC).
+
+Read [PLAN.md](https://github.com/go-scikit/roadmap/blob/main/PLAN.md) for the
+rules and the homes, [STATUS.md](https://github.com/go-scikit/roadmap/blob/main/STATUS.md)
+for the state of each item, and [bib/](https://github.com/go-scikit/roadmap/tree/main/bib)
+for the bibliography each item starts from.
+
 ## Repositories here
 
 | Repo | What it is |
 |------|------------|
 | [**go-scikit.github.io**](https://github.com/go-scikit/go-scikit.github.io) | the portal (Hugo): the stack, one card per organisation, a first notebook |
 | [**brand**](https://github.com/go-scikit/brand) | logo, icons and social images; the mark is the stack, written by a Go program |
+| [**roadmap**](https://github.com/go-scikit/roadmap) | the parity plan with MATLAB and Mathematica: homes, waves, status and bibliography |
 | [**.github**](https://github.com/go-scikit/.github) | this profile and the shared Renovate preset |
 
 The libraries themselves live in their organisations above. Everything is
