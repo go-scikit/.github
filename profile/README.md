@@ -2,7 +2,7 @@
 
 # go-scikit
 
-🌐 **[Website](https://go-scikit.github.io)**
+🌐 **[Website](https://go-scikit.github.io)** · 📚 **[Documentation](https://go-scikit.github.io/docs/)**
 
 **The scientific stack for Go, in pure Go (CGO=0): N-dimensional arrays, FFTs, numerical methods, statistics, labelled tables, figures and notebooks.**
 
@@ -94,8 +94,9 @@ The goal is feature parity with MATLAB (base and toolboxes) and Mathematica,
 in pure Go (CGO=0), each piece validated against the reference tools of its
 domain (SciPy/NumPy, mpmath, Octave, PARI/GP, Maxima, SuiteSparse, NIST StRD
 and others). The plan, the home of each domain and the order of the work are
-in [go-scikit/roadmap](https://github.com/go-scikit/roadmap). None of the new
-organisations below has released anything yet.
+in [go-scikit/roadmap](https://github.com/go-scikit/roadmap). Four packages of the
+new organisations are released at v0.1.0 (go-approx/interp, go-approx/poly,
+go-dsp/signal and go-sparse/sparse) and go-bignum/bigfloat is in development.
 
 | Wave | What | Homes |
 |---|---|---|
@@ -106,10 +107,10 @@ organisations below has released anything yet.
 
 The thirteen new organisations, created on 2026-10-17:
 
-- [**go-bignum**](https://github.com/go-bignum), in progress: arbitrary precision, number theory, the Go oracle harness.
-- [**go-sparse**](https://github.com/go-sparse), in progress: sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers.
-- [**go-approx**](https://github.com/go-approx), in progress: interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data.
-- [**go-dsp**](https://github.com/go-dsp), in progress: filter design and filtering, spectral estimation, resampling, wavelets, audio I/O.
+- [**go-bignum**](https://github.com/go-bignum) ([site](https://go-bignum.github.io/), [docs](https://go-bignum.github.io/docs/)), bigfloat in development, not yet tagged: arbitrary precision, number theory, the Go oracle harness.
+- [**go-sparse**](https://github.com/go-sparse) ([site](https://go-sparse.github.io/), [docs](https://go-sparse.github.io/docs/)), sparse v0.1.0 released: sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers.
+- [**go-approx**](https://github.com/go-approx) ([site](https://go-approx.github.io/), [docs](https://go-approx.github.io/docs/)), interp and poly v0.1.0 released: interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data.
+- [**go-dsp**](https://github.com/go-dsp) ([site](https://go-dsp.github.io/), [docs](https://go-dsp.github.io/docs/)), signal v0.1.0 released: filter design and filtering, spectral estimation, resampling, wavelets, audio I/O.
 - [**go-symbolic**](https://github.com/go-symbolic), planned: computer algebra.
 - [**go-mlkit**](https://github.com/go-mlkit), planned: machine learning, clustering, classification, model selection.
 - [**go-autodiff**](https://github.com/go-autodiff), planned: automatic differentiation.
@@ -130,6 +131,7 @@ for the bibliography each item starts from.
 | Repo | What it is |
 |------|------------|
 | [**go-scikit.github.io**](https://github.com/go-scikit/go-scikit.github.io) | the portal (Hugo): the stack, one card per organisation, a first notebook |
+| [**docs**](https://github.com/go-scikit/docs) | the documentation site (Hugo + Hextra), served at [/docs/](https://go-scikit.github.io/docs/) |
 | [**brand**](https://github.com/go-scikit/brand) | logo, icons and social images; the mark is the stack, written by a Go program |
 | [**roadmap**](https://github.com/go-scikit/roadmap) | the parity plan with MATLAB and Mathematica: homes, waves, status and bibliography |
 | [**.github**](https://github.com/go-scikit/.github) | this profile and the shared Renovate preset |
