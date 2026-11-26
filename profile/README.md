@@ -52,8 +52,8 @@ says how it was measured.
 
 - **Accuracy against mpmath.** go-statistics measures every distribution
   function in ULPs against [mpmath](https://mpmath.org), with SciPy measured
-  on the same points: the error is at or below SciPy's in 1473 of 1479
-  regions, and the six exceptions are under 4.5 ulp
+  on the same points: the error is at or below SciPy's in 1477 of 1479
+  regions, and the two exceptions (beta survival function) are under 0.75 ulp
   ([accuracy.md](https://github.com/go-statistics/stats/blob/main/docs/accuracy.md)).
   go-numerics' special functions: about 250 000 points in 419 regions over
   62 functions, at or below SciPy's error in 418 regions
@@ -77,12 +77,20 @@ says how it was measured.
   cases; go-plot's tick locations and labels on 408 axes of real figures are
   matplotlib's, every location bit for bit
   ([design.md](https://github.com/go-plot/plot/blob/main/docs/design.md)).
-- **Speed, both ways.** At v0.27.0 go-fft is faster than FFTW on all 24 rows
-  on Neoverse-N1 and at or above numpy.fft and scipy.fft on all 24 rows on
-  every host measured ([BENCHMARKS.md](https://github.com/go-fft/fft/blob/main/BENCHMARKS.md)).
-  go-ndarray against NumPy 2.5.3 and OpenBLAS: faster on reductions and
-  the `*Into` forms of elementwise operations, slower on `MatMul` against 16-thread OpenBLAS
-  from 512² ([perf.md](https://github.com/go-ndarray/ndarray/blob/main/docs/perf.md)).
+- **Speed, both ways.** Single core, interleaved rounds, rows where the
+  reference is faster included. go-ndarray against NumPy (2026-11-15, one
+  CPU): faster on 54 of 256 rows, tied on 17, slower on 185
+  ([perf-table.md](https://github.com/go-ndarray/ndarray/blob/main/docs/perf-table.md)).
+  go-numerics' special functions against SciPy (2026-11-23): faster on 111 of
+  156 rows, tied on 1, slower on 44
+  ([perf-table.md](https://github.com/go-numerics/special/blob/main/docs/perf-table.md)).
+  go-numerics' optimize against SciPy: faster on 53 of 53 rows at v0.9.0, BFGS
+  on the 100-variable Rosenbrock 5.42 ms against 47.3 ms
+  ([perf.md](https://github.com/go-numerics/optimize/blob/main/docs/perf.md)).
+  go-fft: the earlier multi-host record against FFTW, numpy.fft and scipy.fft
+  is kept as history ([BENCHMARKS.md](https://github.com/go-fft/fft/blob/main/BENCHMARKS.md));
+  the 153-row table is not yet timed
+  ([perf-table.md](https://github.com/go-fft/fft/blob/main/docs/perf-table.md)).
   go-statistics against SciPy, rows where SciPy is faster included
   ([perf.md](https://github.com/go-statistics/stats/blob/main/docs/perf.md)).
   polars is faster than go-dataframe on most of the operations measured
@@ -94,9 +102,10 @@ The goal is feature parity with MATLAB (base and toolboxes) and Mathematica,
 in pure Go (CGO=0), each piece validated against the reference tools of its
 domain (SciPy/NumPy, mpmath, Octave, PARI/GP, Maxima, SuiteSparse, NIST StRD
 and others). The plan, the home of each domain and the order of the work are
-in [go-scikit/roadmap](https://github.com/go-scikit/roadmap). Five packages of the
-new organisations are released (go-approx/interp v0.2.0; go-approx/poly,
-go-dsp/signal, go-sparse/sparse and go-bignum/bigfloat v0.1.0).
+in [go-scikit/roadmap](https://github.com/go-scikit/roadmap). Six packages of the
+new organisations are released (go-approx/interp v0.2.2, go-approx/poly
+v0.1.1, go-dsp/signal v0.2.0, go-sparse/sparse v0.3.2, go-bignum/bigfloat
+v0.2.0 and go-geometry/predicates v0.1.0).
 
 | Wave | What | Homes |
 |---|---|---|
@@ -107,14 +116,14 @@ go-dsp/signal, go-sparse/sparse and go-bignum/bigfloat v0.1.0).
 
 The thirteen new organisations, created on 2026-10-17:
 
-- [**go-bignum**](https://github.com/go-bignum) ([site](https://go-bignum.github.io/), [docs](https://go-bignum.github.io/docs/)), bigfloat released v0.1.0: arbitrary precision, number theory, the Go oracle harness.
-- [**go-sparse**](https://github.com/go-sparse) ([site](https://go-sparse.github.io/), [docs](https://go-sparse.github.io/docs/)), sparse v0.1.0 released: sparse matrices, orderings, iterative and direct solvers, sparse eigensolvers.
-- [**go-approx**](https://github.com/go-approx) ([site](https://go-approx.github.io/), [docs](https://go-approx.github.io/docs/)), interp and poly v0.1.0 released: interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data.
-- [**go-dsp**](https://github.com/go-dsp) ([site](https://go-dsp.github.io/), [docs](https://go-dsp.github.io/docs/)), signal v0.1.0 released: filter design and filtering, spectral estimation, resampling, wavelets, audio I/O.
+- [**go-bignum**](https://github.com/go-bignum) ([site](https://go-bignum.github.io/), [docs](https://go-bignum.github.io/docs/)), bigfloat released v0.2.0: arbitrary precision, number theory, the Go oracle harness.
+- [**go-sparse**](https://github.com/go-sparse) ([site](https://go-sparse.github.io/), [docs](https://go-sparse.github.io/docs/)), sparse v0.3.2 released: sparse matrices, orderings, iterative solvers, a quasi-definite LDLᵀ factorisation; general direct solvers and sparse eigensolvers planned.
+- [**go-approx**](https://github.com/go-approx) ([site](https://go-approx.github.io/), [docs](https://go-approx.github.io/docs/)), interp v0.2.2 and poly v0.1.1 released: interpolation, splines, polynomials, Chebyshev and AAA approximation, scattered data.
+- [**go-dsp**](https://github.com/go-dsp) ([site](https://go-dsp.github.io/), [docs](https://go-dsp.github.io/docs/)), signal v0.2.0 released: filter design and filtering, spectral estimation, resampling, wavelets, audio I/O.
 - [**go-symbolic**](https://github.com/go-symbolic), planned: computer algebra.
 - [**go-mlkit**](https://github.com/go-mlkit), planned: machine learning, clustering, classification, model selection.
 - [**go-autodiff**](https://github.com/go-autodiff), planned: automatic differentiation.
-- [**go-geometry**](https://github.com/go-geometry), planned: robust predicates, convex hull, Delaunay, Voronoi, k-d trees, mesh generation.
+- [**go-geometry**](https://github.com/go-geometry), predicates v0.1.0 released: robust predicates; planned: convex hull, Delaunay, Voronoi, k-d trees, mesh generation.
 - [**go-fem**](https://github.com/go-fem), planned: finite elements and PDE solvers.
 - [**go-graphalgo**](https://github.com/go-graphalgo), planned: graph algorithms.
 - [**go-control**](https://github.com/go-control), planned: control systems and DAE solvers.
